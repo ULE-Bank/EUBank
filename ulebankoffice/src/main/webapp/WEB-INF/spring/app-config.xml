@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/data/mongo
+       http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+	
+		
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="alwaysUseFullPath" value="true"></property>
+	</bean>
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="fileEncodings" value="UTF-8" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+       <!-- Scans the classpath of this application for @Components to deploy as beans -->
+    <context:component-scan base-package="es.unileon.ulebankoffice.web" />
+	<context:component-scan base-package="es.unileon.ulebankoffice.security" />
+
+
+       <!-- Configures the @Controller programming model -->
+    <mvc:annotation-driven/>
+    	
+    <mvc:default-servlet-handler />
+        
+       
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <property name="suffix" value=".jsp"></property>        
+    </bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="es" />
+		<property name="cookieName" value="ULeBankLanguagePreference"></property>
+		<property name="cookieMaxAge" value="604800"></property>
+	</bean>
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		 <!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="10000000" />
+	</bean>
+	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<mvc:resources mapping="resources/**" location="/resources/" />
+
+	<mvc:interceptors>
+		<bean id="localeChangeInterceptor"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="language" />
+		</bean>
+	</mvc:interceptors>
+	
+	<mongo:template db-factory-ref="mongoDBFactory"
+		write-concern="FSYNC_SAFE" />
+
+	<mongo:db-factory id="mongoDBFactory" dbname="ulebankoffice"
+		mongo-ref="mongoClient" />
+
+	<mongo:mapping-converter id="converter" db-factory-ref="mongoDBFactory"/>
+	
+	<bean id="gridTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
+	  <constructor-arg ref="mongoDBFactory"/>
+	  <constructor-arg ref="converter"/>
+	</bean>
+
+	<mongo:mongo-client id="mongoClient"
+		credentials="razvan:ulerazvanule@ulebankoffice">
+		<mongo:client-options connect-timeout="5000" />
+	</mongo:mongo-client>
+
+	<mongo:repositories base-package="es.unileon.ulebankoffice.repository" />
+	
+</beans>

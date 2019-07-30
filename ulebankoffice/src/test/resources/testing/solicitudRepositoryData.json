@@ -1,0 +1,48 @@
+{
+	"Solicitudes": [{
+			"_class": "es.unileon.ulebankoffice.domain.SolicitudDomain",
+			"estado": "En trámite",
+			"fechaApertura": {
+				"$date": "1994-12-04T23:00:00.000Z"
+			},
+			"productId": "id1"
+		},
+
+		{
+			"_class": "es.unileon.ulebankoffice.domain.SolicitudDomain",
+			"estado": "Cancelada",
+			"fechaApertura": {
+				"$date": "1994-12-04T23:00:00.000Z"
+			},
+			"fechaResolucion": {
+				"$date": "1994-12-04T23:00:00.000Z"
+			},
+			"productId": "id4"
+		},
+
+		{
+			"_class": "es.unileon.ulebankoffice.domain.SolicitudDomain",
+			"estado": "Aceptada",
+			"fechaApertura": {
+				"$date": "1994-12-04T23:00:00.000Z"
+			},
+			"fechaResolucion": {
+				"$date": "1994-12-04T23:00:00.000Z"
+			},
+			"productId": "id3"
+		},
+
+		{
+			"_class": "es.unileon.ulebankoffice.domain.SolicitudDomain",
+			"estado": "Aceptada",
+			"fechaApertura": {
+				"$date": "1994-12-04T23:00:00.000Z"
+			},
+			"fechaResolucion": {
+				"$date": "1994-12-04T23:00:00.000Z"
+			},
+			"productId": "id2"
+		}
+
+	]
+}

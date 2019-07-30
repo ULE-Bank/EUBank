@@ -1,0 +1,42 @@
+{
+   "Addresses":[
+      {
+         "_class":"es.unileon.ulebankoffice.domain.Address",
+         "street":"ejemploStreet",
+         "city":"León",
+         "autonomousRegion" : "CastillaLeón",
+         "number" : "S/N",
+         "postalCode" : 39400,
+         "dni":{
+            "_class":"es.unileon.ulebankoffice.domain.DNIHandler",
+            "_id":"X5526828C"
+         }
+      },
+      
+       {
+         "_class":"es.unileon.ulebankoffice.domain.Address",
+         "street":"ejemploStreet",
+         "city":"Cantabria",
+         "autonomousRegion" : "Cantabria",
+         "number" : "S/N",
+         "postalCode" : 39400,
+         "dni":{
+            "_class":"es.unileon.ulebankoffice.domain.DNIHandler",
+            "_id":"X5526828C"
+         }
+      },
+      
+       {
+         "_class":"es.unileon.ulebankoffice.domain.Address",
+         "street":"ejemploStreet",
+         "city":"Universidad de León",
+         "autonomousRegion" : "Universidad de León",
+         "number" : "S/N",
+         "postalCode" : 39400,
+         "dni":{
+            "_class":"es.unileon.ulebankoffice.domain.DNIHandler",
+            "_id":"X5526828C"
+         }
+      }
+   ]
+}

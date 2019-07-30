@@ -1,0 +1,32 @@
+{
+   "UleBankEmployees":[
+      {
+         "_class":"es.unileon.ulebankoffice.domain.UleBankEmployeeDomain",
+         "userName":"cjrulebank",
+         "password":"password",
+         "role" : "admin"
+      },
+      
+     {
+         "_class":"es.unileon.ulebankoffice.domain.UleBankEmployeeDomain",
+         "userName":"user1",
+         "password":"user",
+         "role" : "empleado"
+      },
+      
+         {
+         "_class":"es.unileon.ulebankoffice.domain.UleBankEmployeeDomain",
+         "userName":"user2",
+         "password":"user",
+         "role" : "supervisor"
+      },
+      
+         {
+         "_class":"es.unileon.ulebankoffice.domain.UleBankEmployeeDomain",
+         "userName":"user3",
+         "password":"user",
+         "role" : "user"
+      }
+      
+   ]
+}

@@ -1,0 +1,399 @@
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('/fonts/glyphicons-halflings-regular.eot');
+}
+
+@font-face {
+    font-family: trebuchet;
+    src: url(../fonts/trebuchet.ttf);
+}
+
+html, body {
+    height: 100%;
+    padding: 0; 
+    margin: 0;
+    font-family: trebuchet;
+}
+
+body {
+    display: table;
+    width: 100%;
+}
+
+.general-class {
+  display: table-row;
+}
+
+p {
+    margin: 0;
+}
+
+header {
+	height: 56px;
+    width: 100%;
+    background-color: #231f20;
+}
+
+header .header-content {
+    margin: 0 auto;
+    /*max-width: 960px;*/
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+header .header-content a {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+header .header-content .header-search-content {
+    float: right;
+}
+
+main {
+    margin: 0 auto;
+    width: auto;
+    min-height: 860px;
+    max-width: 100%;
+}
+
+main .home-top {
+    background-color: rgb(0, 150, 136);
+}
+
+main .home-top .container .wellcome {
+    padding-right: 40px;
+    padding-bottom: 40px;
+}
+
+main .home-top .container .popular {
+    margin-top: 56px;
+    color: white;
+    background-color: #231f20;
+    padding: 15px;
+}
+
+main .home-top .container .wellcome h1 {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+main .home-top .container .wellcome .patro {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+main .home-top .container .wellcome .patro .strong {
+    font-weight: bold;
+}
+
+.principal-search {
+    padding: 12px;
+    border: solid 4px #231f20;
+}
+
+.principal-submit {
+    padding: 12px;
+    background-color: #231f20;
+    border: solid 4px #231f20;
+    border-radius: 0px;
+}
+
+.header-search {
+    padding: 6px;
+    border: solid 3px transparent;
+}
+
+.header-submit {
+    padding: 6px;
+    background-color: white;
+    border: solid 3px transparent;
+}
+
+.white {
+    color: white;
+}
+
+main .no-padding {
+    padding: 0;
+}
+
+main .container {
+    background: url('../img/wrapper-bck.png') no-repeat right bottom;
+}
+
+main .home-top .container {
+    background: none;
+}
+
+main .wrapper {
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 960px;
+    background: url('../img/wrapper-bck.png') no-repeat right bottom;
+}
+
+main .container .services {
+    margin-top: 40px;
+}
+
+main .wrapper .modal-link {
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+.popular ul {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.popular ul li a h3 {
+    margin-top: -4px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.popular ul li a h3:hover {
+    color: #efeae5;
+    text-decoration: underline;
+}
+
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ol li {
+    height: 90px;
+}
+
+ol li a {
+    color: #231f20;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+ol li h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.global-header {
+    margin: 0 auto;
+    height: 10px;
+    background-color: rgb(0, 150, 136);
+}
+
+footer {
+    background: #efeae5;
+}
+
+footer .footer-corporative {
+    background-color: rgb(0, 150, 136);
+    height: 8px;
+}
+
+footer .footer-container {
+    margin: 0 auto;
+    padding-top: 20px;
+    /*max-width: 960px;*/
+    padding-bottom: 50px;
+}
+
+footer .footer-container .row ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+footer .footer-container .row p {
+    margin: 0;
+    margin-top: 15px;
+    padding: 0;
+}
+
+footer .footer-container .row {
+    padding-bottom: 50px;
+}
+
+footer .footer-container li {
+    padding-top: 20px;
+}
+
+footer .footer-container .list-inline li {
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+footer .footer-container .links a {
+    color: black;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+footer .footer-container .legal a {
+    color: #333;
+    text-decoration: underline;
+}
+
+footer .footer-container .copyright {
+    display: table;
+}
+
+footer .footer-container .ule-logo {
+    width: 150px;
+    height: 150px;
+}
+
+footer .footer-container .copyright .ule {
+    display: table-cell;
+    text-align: center;
+}
+
+hr {
+    border-top: 1px solid #333;
+    clear: both;
+}
+
+.breadcrumb {
+    width: 100%;
+    height: 50px;
+    padding-left: 0;
+    background-color: transparent;
+}
+
+.input-info {
+    margin-top: 32px;
+}
+
+.btn-header-search {
+    color: white;
+    background-color: rgb(0, 150, 136);
+}
+
+.btn-header-search:hover, .btn-header-search:active, .btn-header-search:visited {
+    color: white;
+}
+
+.browse-root {
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+}
+
+.browse-root ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.browse-root a, .browse-root a:hover, .browse-root a:active, .browse-root a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.browse-root ul li {
+    display: table;
+    width: 100%;
+    height: 50px;
+}
+
+.browse-root ul li span {
+    display: table-cell;
+    vertical-align: middle;
+    height: 50px;
+    padding-left: 20px;
+}
+
+.browse-root ul li .category {
+    width: 80%;
+    font-size: 16px;
+}
+
+.browse-root ul .active {
+    background-color: rgb(0, 150, 136);
+    color: white;
+}
+
+.browse-root ul .no-active:hover {
+    background-color: #efeae5;
+}
+
+.browse-results {
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-left: 1px solid #efeae5;
+}
+
+.browse-results .alphabetical {
+    padding-left: 35px;
+    padding-top: 50px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.browse-results .results {
+    display: inline-block;
+}
+
+.browse-results .results h2 {
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+
+.browse-results .results ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.browse-results .results li {
+    padding: 10px;
+}
+
+.browse-results .results li:hover {
+    background-color: #efeae5;
+}
+
+.browse-results .results a, .browse-results .results a:hover, .browse-results .results a:active, .browse-results .results a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.browse-results .results li h4 {
+    color: black;
+    margin: 0;
+}
+
+#myChart {
+    padding: 0;
+    margin: auto;
+    margin-top: 50px;
+    display: block;
+}
+
+.last-element {
+	margin-bottom: 15px;
+}
+
+.cookies-alert {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding-left: 100px;
+    padding-right: 100px;
+    width: 100%;
+}
+
+.about-section {
+	padding: 30px;
+}

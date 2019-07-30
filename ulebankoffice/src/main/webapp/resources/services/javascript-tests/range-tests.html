@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        
+        <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico" />
+        
+        <link rel="stylesheet" href="../css/qunit.css">
+        
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/jquery.min.js"></script>
+        
+        <script src="/resources/js/script.js"></script>
+        
+        <title>QUnit JavaScript Range Tests</title>
+        
+    </head>
+
+    <body>
+    
+    <div id="qunit"></div>
+  	<div id="qunit-fixture"></div>
+    
+    <input type="hidden" id="p" name="p"/><span id="p-expl">1 - anual</span>
+	<input type="range" id="range" min="1" max="6" value="1" onchange="rangeListener();"/>
+        
+    <script src="/resources/js/qunit.js"></script>
+    
+    <script type="text/javascript">
+    	QUnit.test("Default range test", function( assert ) {
+    		var hidden = document.getElementById("p");
+    		var text = document.getElementById("p-expl");
+    		
+    		assert.equal(hidden.value, "1");
+    		assert.equal(text.innerHTML, "1 - anual");
+  		});
+  		
+  		QUnit.test("Range change to 1", function( assert ) {
+  			var range = document.getElementById("range");
+    		var hidden = document.getElementById("p");
+    		var text = document.getElementById("p-expl");
+    		
+    		range.value = "1";
+    		rangeListener();
+    		
+    		assert.equal(hidden.value, "1");
+    		assert.equal(text.innerHTML, "1 - anual");
+  		});
+  		
+  		QUnit.test("Range change to 2", function( assert ) {
+  			var range = document.getElementById("range");
+    		var hidden = document.getElementById("p");
+    		var text = document.getElementById("p-expl");
+    		
+    		range.value = "2";
+    		rangeListener();
+    		
+    		assert.equal(hidden.value, "2");
+    		assert.equal(text.innerHTML, "2 - semestral");
+  		});
+  		
+  		QUnit.test("Range change to 3", function( assert ) {
+  			var range = document.getElementById("range");
+    		var hidden = document.getElementById("p");
+    		var text = document.getElementById("p-expl");
+    		
+    		range.value = "3";
+    		rangeListener();
+    		
+    		assert.equal(hidden.value, "3");
+    		assert.equal(text.innerHTML, "3 - cuatrimestral");
+  		});
+  		
+  		QUnit.test("Range change to 4", function( assert ) {
+  			var range = document.getElementById("range");
+    		var hidden = document.getElementById("p");
+    		var text = document.getElementById("p-expl");
+    		
+    		range.value = "4";
+    		rangeListener();
+    		
+    		assert.equal(hidden.value, "4");
+    		assert.equal(text.innerHTML, "4 - trimestral");
+  		});
+  		
+  		QUnit.test("Range change to 5", function( assert ) {
+  			var range = document.getElementById("range");
+    		var hidden = document.getElementById("p");
+    		var text = document.getElementById("p-expl");
+    		
+    		range.value = "5";
+    		rangeListener();
+    		
+    		assert.equal(hidden.value, "6");
+    		assert.equal(text.innerHTML, "6 - bimensual");
+  		});
+  		
+  		QUnit.test("Range change to 6", function( assert ) {
+  			var range = document.getElementById("range");
+    		var hidden = document.getElementById("p");
+    		var text = document.getElementById("p-expl");
+    		
+    		range.value = "6";
+    		rangeListener();
+    		
+    		assert.equal(hidden.value, "12");
+    		assert.equal(text.innerHTML, "12 - mensual");
+  		});
+  	</script>
+        
+    </body>
+
+</html>

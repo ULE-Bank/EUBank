@@ -1,0 +1,56 @@
+{
+   "CurrentAccounts":[
+   {
+         "_class":"es.unileon.ulebankoffice.domain.CurrentAccount",
+         "status" : "abierta",
+         "creditorInterests": 1.0,
+         "debtorInterestOverNegativeBalance" : 1.0,
+         "capitalPerformanceRetention" : 1.0,
+         "maintenanceComission" : 1.0,
+         "maintenanceDeficit" : 1.0,
+         "minMaintenanceDeficit" : 1.0,
+         "annualDays" : 360,
+         "liquidationPeriod" : 4,
+         "totalBalance" : 100.0,
+         "accountNumber" : "abc001",
+         "dni":{
+            "_class":"es.unileon.ulebankoffice.domain.DNIHandler",
+            "_id":"X5526828C"
+         }
+        },
+      
+        {
+         "_class":"es.unileon.ulebankoffice.domain.CurrentAccount",
+         "status" : "cerrada",
+         "creditorInterests": 1.0,
+         "debtorInterestOverNegativeBalance" : 1.0,
+         "capitalPerformanceRetention" : 1.0,
+         "maintenanceComission" : 1.0,
+         "maintenanceDeficit" : 1.0,
+         "minMaintenanceDeficit" : 1.0,
+         "annualDays" : 360,
+         "liquidationPeriod" : 4,
+         "dni":{
+            "_class":"es.unileon.ulebankoffice.domain.DNIHandler",
+            "_id":"X5526828C"
+         }
+      },
+      
+       {
+         "_class":"es.unileon.ulebankoffice.domain.CurrentAccount",
+         "status" : "abierta",
+         "creditorInterests": 1.0,
+         "debtorInterestOverNegativeBalance" : 1.0,
+         "capitalPerformanceRetention" : 1.0,
+         "maintenanceComission" : 1.0,
+         "maintenanceDeficit" : 1.0,
+         "minMaintenanceDeficit" : 1.0,
+         "annualDays" : 360,
+         "liquidationPeriod" : 4,
+         "dni":{
+            "_class":"es.unileon.ulebankoffice.domain.DNIHandler",
+            "_id":"X4975127C"
+         }
+      }
+   ]
+}
