@@ -16,10 +16,12 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<archiveClasses>true</archiveClasses>
-		<org.springframework.version>4.3.7.RELEASE</org.springframework.version>
+		<org.springframework.version>4.3.18.RELEASE</org.springframework.version>
 		<!-- I declare argLine as a property so JaCoCo can set its agent properly. -->
 		<argLine>-Xms256m -Xmx512m -ea -Dfile.encoding=UTF-8 -Dtest=*</argLine>
-		<spring.security.core.version>3.1.0.RELEASE</spring.security.core.version>
+		<spring.security.core.version>4.1.1.RELEASE</spring.security.core.version>
+        <tomcat.version>8.5.37</tomcat.version>
+	
 	</properties>
 
  	<dependencies>
@@ -114,7 +116,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-commons</artifactId>
-   			 <version>1.13.7.RELEASE</version>
+   			 <version>1.13.12.RELEASE</version>
     	</dependency>
 		<dependency>
 		    <groupId>org.springframework.data</groupId>
@@ -135,20 +137,21 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>3.2.18.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
+			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -244,7 +247,7 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
+			<version>1.3.3</version>
 		</dependency>
 		
 		<dependency>
@@ -252,7 +255,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-
+    
 	</dependencies>
   <build>
     <finalName>ulebankoffice</finalName>

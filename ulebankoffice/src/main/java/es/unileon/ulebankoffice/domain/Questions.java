@@ -58,4 +58,14 @@ public class Questions {
     public java.util.Iterator<Question> getIterator() {
         return questions.iterator();
     }
+    
+    public int getMaxPosition() {
+    	int maxPosition = -1;
+    	for(Question question: this.questions) {
+    		if(question.getPosition() > maxPosition || maxPosition == -1) {
+    			maxPosition = question.getPosition();
+    		}
+    	}
+    	return maxPosition != -1 ? maxPosition : 0;
+    }
 }

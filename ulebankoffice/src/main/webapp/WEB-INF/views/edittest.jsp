@@ -161,7 +161,7 @@
 
    <script>
 		function deleteQuestion(value) {
-			if (confirm('Delete?')) {
+			if (confirm('<spring:message code="label.confirmDeleteQuestion"/>')) {
 				document.getElementById('question-delete').value = value;
 				document.getElementById('sendFormSurvey').click();
 			}

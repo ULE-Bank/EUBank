@@ -114,6 +114,13 @@
       <%! int nCompounds = 0; %>
 	  <%! int nSimples = 0; %>
 	  <%! int currentSimplesCompound = 0; %>
+	  <%! int total = 0; %>
+	  
+	  <% nSimples = 0; %>
+	  <% nCompounds = 0; %>
+	  <% currentSimplesCompound = 0; %>
+	  <% total = 0; %>
+	  
       <section class="faq white-bg page-section-ptb">
          <div class="container">
             <div class="row col-md-10 col-md-offset-1">
@@ -123,6 +130,13 @@
                   <form name="f" action="editquestion" method="POST">
                      <div class="section-field">
                         <div class="field-widget">
+                	       <span>
+                           	<spring:message code = "label.position"></spring:message>
+                           </span>
+                           <div class="col-md-12" style="margin:0px; padding:0px">
+                            <input style="background-color: lightgrey" class="mt-20 col-md-2" type="number" name="question-position" id="question-position" min="1" max="${maxPosition}" value="${question.getPosition()}" required>
+	                       	</div>
+	                       	<br>
 	                       	<span>
                               <spring:message code="label.createQuestionTitleForm"/>
                            </span>
@@ -144,48 +158,56 @@
                                  <i class="fa fa-send-o" style="width: 25%; position: unset"></i>
                               </a>
                              
-                           <c:forEach items="${question.getOptions()}" var="option" varStatus="option-index">
+                           <c:forEach items="${question.getOptions()}" var="option">
     							<c:choose>
 								  <c:when test="${option.getOptions().size() > 0}">
 		
-									  <div class="mt-20 col-md-12"> 
+									  <div class="mt-20 col-md-12" id="div-option-<%=total%>"> 
 										  <span class="col-md-12"> 
 										  	<spring:message code="label.addOptionCompound"/>
 										  </span><br><br>
-										  <input name="option-compound-<%=nCompounds%>" id="option-compound-<%=nCompounds%>" type="text" style="background-color: lightgrey" value="${option.getText()}"required> 
+										  <input name="option-compound-<%=nCompounds%>" id="option-compound-<%=nCompounds%>" type="text" style="background-color: lightgrey; width: 80%" value="${option.getText()}"required> 
+										  <button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeCompound('div-option-<%=total%>')"><span style="font-weight:bold;text-align:center">X</span></button>
 										  <a class="button mt-10" id="button-<%=nCompounds%>" style="width:27%; display: flex; flex-direction: row" onclick="addSimpleFromCompound(this)">
 											  <span style="width: 75%">
 											  	<spring:message code="label.addOptionSimple"/>
 											  </span>
 											  <i class="fa fa-send-o" style="width: 25%; position: unset"></i>
 										  </a>
+	                           			
+	                           			<% total += 1; %>
 										
-										<c:forEach items="${option.getOptions()}" var="subOption" varStatus="suboption-index">
-											<div class="mt-20 col-md-12"> 
+										<c:forEach items="${option.getOptions()}" var="subOption">
+											<div class="mt-20 col-md-12" id="div-option-<%=total%>"> 
 												<span class="col-md-12">
 													<spring:message code="label.addOptionSimple"/>
 												</span><br><br>
-												<input name="option-compound-<%=nCompounds%>-simple-<%=currentSimplesCompound%>" id="option-compound-<%=nCompounds%>-simple-<%=currentSimplesCompound%>" type="text" style="width: 84%; background-color: lightgrey" value="${subOption.getText()}" required> 
+												<input name="option-compound-<%=nCompounds%>-simple-<%=currentSimplesCompound%>" id="option-compound-<%=nCompounds%>-simple-<%=currentSimplesCompound%>" type="text" style="width: 70%; background-color: lightgrey" value="${subOption.getText()}" required> 
 											    <input id="option-compound-<%=nCompounds%>-simple-<%=currentSimplesCompound%>-value" name="option-compound-<%=nCompounds%>-simple-<%=currentSimplesCompound%>-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 15%; text-align:left; background-color: lightgrey" value="${subOption.getWeight()}" required> 
+												<button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeSimpleFromCompound('div-option-<%=total%>', <%=nCompounds%>)"><span style="font-weight:bold;text-align:center">X</span></button>
 											</div>
 			                          	 <% currentSimplesCompound += 1; %>
+	                           			 <% total += 1; %>
 										</c:forEach>
 										<input type=number name="total-simple-compound-<%=nCompounds%>" id="total-simple-compound-<%=nCompounds%>" value=<%= currentSimplesCompound%> style="display:none"> 
 										
 									  </div>
 									  <% currentSimplesCompound = 0; %>
-	                           			<% nCompounds+= 1; %>
+	                           		  <% nCompounds += 1; %>
+
 
 								  </c:when>
 								  <c:otherwise>
-								    <div class="mt-20 col-md-12"> 
+								    <div class="mt-20 col-md-12" id="div-option-<%=total%>"> 
 								    	<span class="col-md-12">
 								    		<spring:message code="label.addOptionSimple"/>
 								    	</span><br><br>
-								    	<input name="option-simple-<%=nSimples%>" id="option-simple-<%=nSimples%>" type="text" style="width: 84%; background-color: lightgrey" value="${option.getText()}"required>  
+								    	<input name="option-simple-<%=nSimples%>" id="option-simple-<%=nSimples%>" type="text" style="width: 70%; background-color: lightgrey" value="${option.getText()}"required>  
 								    	<input id="option-simple-<%=nSimples%>-value" name="option-simple-<%=nSimples%>-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 15%; text-align:left; background-color: lightgrey" value="${option.getWeight()}"required> 
+								    	<button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeSimple('div-option-<%=total%>')"><span style="font-weight:bold;text-align:center">X</span></button>
 								    	</div>
                            			<% nSimples+= 1; %>
+                           			<% total += 1; %>
 								  </c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -194,9 +216,6 @@
                            </div>
                         </div>
                      </div>
-					  <% nSimples = 0; %>
-					  <% nCompounds = 0; %>
-					  <% currentSimplesCompound = 0; %>
                      
                      <div class="section-field">
                         <input id="sendFormQuestion" style="display: none" name="submit" type="submit"> 
@@ -221,49 +240,72 @@
    <script>
    	  var totalOptionsSimple = <%= nSimples %>
    	  var totalOptionsCompound = <%= nCompounds %>
-	 
+	  var totalCounter = <%= total %>
+	  
+	  $("#total-simple").val(totalOptionsSimple);
+	  $("#total-compound").val(totalOptionsCompound);
+
 	  function addSimpleFromCompound(component) {
     	  var associatedCompound = $("#" + component.id).attr('id');
     	  var valueCompound = associatedCompound.substring(associatedCompound.length - 1, associatedCompound.length);
-		  $("#" + component.id).parent().append('<div class="mt-20 col-md-12"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-compound-'+valueCompound+'-simple-' + $("#total-simple-compound-" + valueCompound).val() + '" id="option-compound-'+valueCompound+'-simple-' + $("#total-simple-compound-" + valueCompound).val() + '" type="text" style="width: 89%; background-color: lightgrey" required>  <input id="option-compound-' + valueCompound +'-simple-'+ $("#total-simple-compound-" + valueCompound).val() + '-value" name="option-compound-' + valueCompound +'-simple-'+ $("#total-simple-compound-" + valueCompound).val() + '-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 10%; background-color: lightgrey" required> </div>');
-    	  $("#total-simple-compound-" + valueCompound).val(parseInt($("#total-simple-compound-" + valueCompound).val()) + 1);
-   	  }
+		  $("#" + component.id).parent().append('<div class="mt-20 col-md-12" id = "div-option-' + totalCounter + '"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-compound-'+valueCompound+'-simple-' + totalCounter + '" id="option-compound-'+valueCompound+'-simple-' + totalCounter + '" type="text" style="width: 70%; background-color: lightgrey" required>  <input id="option-compound-' + valueCompound +'-simple-'+ totalCounter + '-value" name="option-compound-' + valueCompound +'-simple-'+ totalCounter + '-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 15%; text-align: left; background-color: lightgrey" required> <button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeSimpleFromCompound(\'div-option-'+totalCounter+'\','+valueCompound+')"><span style="font-weight:bold;text-align:center">X</span></button> </div>');
+		  $("#total-simple-compound-" + valueCompound).val(parseInt($("#total-simple-compound-" + valueCompound).val()) + 1);
+	   	  totalCounter += 1;
+	  }
 	  
 	  function addSimpleToCompound(valueCompound) {
-		  $("#" + component.id).parent().append('<div class="mt-20 col-md-12"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-compound-'+valueCompound+'-simple-' + $("#total-simple-compound-" + valueCompound).val() + '" id="option-compound-'+valueCompound+'-simple-' + $("#total-simple-compound-" + valueCompound).val() + '" type="text" style="width: 89%; background-color: lightgrey" required>  <input id="option-compound-' + valueCompound +'-simple-'+ $("#total-simple-compound-" + valueCompound).val() + '-value" name="option-compound-' + valueCompound +'-simple-'+ $("#total-simple-compound-" + valueCompound).val() + '-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 10%; background-color: lightgrey" required> </div>');
-    	  $("#total-simple-compound-" + valueCompound).val(parseInt($("#total-simple-compound-" + valueCompound).val()) + 1);
+		  $("#" + component.id).parent().append('<div class="mt-20 col-md-12" id = "div-option-' + totalCounter + '"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-compound-'+valueCompound+'-simple-' + $("#total-simple-compound-" + valueCompound).val() + '" id="option-compound-'+valueCompound+'-simple-' + $("#total-simple-compound-" + valueCompound).val() + '" type="text" style="width: 70%; background-color: lightgrey" required>  <input id="option-compound-' + valueCompound +'-simple-'+ $("#total-simple-compound-" + valueCompound).val() + '-value" name="option-compound-' + valueCompound +'-simple-'+ $("#total-simple-compound-" + valueCompound).val() + '-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 15%; text-align: left; background-color: lightgrey" required> <button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeSimpleFromCompound(\'div-option-'+totalCounter+'\','+valueCompound+')"><span style="font-weight:bold;text-align:center">X</span></button> </div>');
+		  $("#total-simple-compound-" + valueCompound).val(parseInt($("#total-simple-compound-" + valueCompound).val()) + 1);
     	  return $("#total-simple-compound-" + valueCompound).val() - 1;
    	  }
 	  
 	  function addOptionSimple() {
-		  $("#addOptionSimple").parent().append('<div class="mt-20 col-md-12"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-simple-' + totalOptionsSimple + '" id="option-simple-' + totalOptionsSimple + '" type="text" style="width: 89%; background-color: lightgrey" required>  <input id="option-simple-'+ totalOptionsSimple +'-value" name="option-simple-'+ totalOptionsSimple +'-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 10%; background-color: lightgrey" required> </div>');
-	   	  totalOptionsSimple += 1;
+		  $("#addOptionSimple").parent().append('<div class="mt-20 col-md-12" id = "div-option-' + totalCounter + '"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-simple-' + totalOptionsSimple + '" id="option-simple-' + totalOptionsSimple + '" type="text" style="width: 70%; background-color: lightgrey" required>  <input id="option-simple-'+ totalOptionsSimple +'-value" name="option-simple-'+ totalOptionsSimple +'-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 15%; text-align:left; background-color: lightgrey" required> <button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeSimple(\'div-option-'+totalCounter+'\')"><span style="font-weight:bold;text-align:center">X</span></button> </div>');
+		  totalOptionsSimple += 1;
     	  $("#total-simple").val(totalOptionsSimple);
     	  return totalOptionsSimple - 1;
  
 	  }
    	  
       $("#addOptionSimple").click(function() {
-    	  $(this).parent().append('<div class="mt-20 col-md-12"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-simple-' + totalOptionsSimple + '" id="option-simple-' + totalOptionsSimple + '" type="text" style="width: 89%; background-color: lightgrey" required>  <input id="option-simple-'+ totalOptionsSimple +'-value" name="option-simple-'+ totalOptionsSimple +'-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 10%; background-color: lightgrey" required> </div>');
+    	  $(this).parent().append('<div class="mt-20 col-md-12" id = "div-option-' + totalCounter + '"> <span class="col-md-12"><spring:message code="label.addOptionSimple"/></span><br><br><input name="option-simple-' + totalOptionsSimple + '" id="option-simple-' + totalOptionsSimple + '" type="text" style="width: 70%; background-color: lightgrey" required>  <input id="option-simple-'+ totalOptionsSimple +'-value" name="option-simple-'+ totalOptionsSimple +'-value" type="number" min=0 step="0.01" placeholder="0,0" style="width: 15%; text-align:left; background-color: lightgrey" required> <button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeSimple(\'div-option-'+totalCounter+'\')"><span style="font-weight:bold;text-align:center">X</span></button> </div>');
 	   	  totalOptionsSimple += 1;
+	   	  totalCounter += 1;
     	  $("#total-simple").val(totalOptionsSimple);
       });
 
       function addCompound() {
-    	  $("#addOptionCompound").parent().append('<div class="mt-20 col-md-12"> <span class="col-md-12"> <spring:message code="label.addOptionCompound"/></span><br><br><input type=number name="total-simple-compound-'+totalOptionsCompound+'" id="total-simple-compound-'+totalOptionsCompound+'" style="display:none"> <input name="option-compound-' + totalOptionsCompound + '" id="option-compound-' + totalOptionsCompound + '" type="text" style="background-color: lightgrey" required> <a class="button mt-10" id="button-'+totalOptionsCompound+'" style="width:27%; display: flex; flex-direction: row" onclick="addSimpleFromCompound(this)"><span style="width: 75%"><spring:message code="label.addOptionSimple"/></span><i class="fa fa-send-o" style="width: 25%; position: unset"></i></a></div>');
-      	  $("#total-simple-compound-" + totalOptionsCompound).val(0);
+    	  $("#addOptionCompound").parent().append('<div class="mt-20 col-md-12" id = "div-option-' + totalCounter + '"> <span class="col-md-12"> <spring:message code="label.addOptionCompound"/></span><br><br><input type=number name="total-simple-compound-'+totalOptionsCompound+'" id="total-simple-compound-'+totalOptionsCompound+'" style="display:none"> <input name="option-compound-' + totalOptionsCompound + '" id="option-compound-' + totalOptionsCompound + '" type="text" style="background-color: lightgrey; width: 88%" required> <button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeCompound(\'div-option-'+totalCounter+'\')"><span style="font-weight:bold;text-align:center">X</span></button> <a class="button mt-10" id="button-'+totalOptionsCompound+'" style="width:27%; display: flex; flex-direction: row" onclick="addSimpleFromCompound(this)"><span style="width: 75%"><spring:message code="label.addOptionSimple"/></span><i class="fa fa-send-o" style="width: 25%; position: unset"></i></a></div>');
+    	  $("#total-simple-compound-" + totalOptionsCompound).val(0);
     	  totalOptionsCompound += 1;
     	  $("#total-compound").val(totalOptionsCompound);
     	  return totalOptionsCompound - 1;
       }
       
       $("#addOptionCompound").click(function() {
-          $(this).parent().append('<div class="mt-20 col-md-12"> <span class="col-md-12"> <spring:message code="label.addOptionCompound"/></span><br><br><input type=number name="total-simple-compound-'+totalOptionsCompound+'" id="total-simple-compound-'+totalOptionsCompound+'" style="display:none"> <input name="option-compound-' + totalOptionsCompound + '" id="option-compound-' + totalOptionsCompound + '" type="text" style="background-color: lightgrey" required> <a class="button mt-10" id="button-'+totalOptionsCompound+'" style="width:27%; display: flex; flex-direction: row" onclick="addSimpleFromCompound(this)"><span style="width: 75%"><spring:message code="label.addOptionSimple"/></span><i class="fa fa-send-o" style="width: 25%; position: unset"></i></a></div>');
+          $(this).parent().append('<div class="mt-20 col-md-12" id = "div-option-' + totalCounter + '"> <span class="col-md-12"> <spring:message code="label.addOptionCompound"/></span><br><br><input type=number name="total-simple-compound-'+totalOptionsCompound+'" id="total-simple-compound-'+totalOptionsCompound+'" style="display:none"> <input name="option-compound-' + totalOptionsCompound + '" id="option-compound-' + totalOptionsCompound + '" type="text" style="background-color: lightgrey; width: 88%" required> <button class="button" style="display:flex;flex-direction:row;float:left" onclick="deleteNodeCompound(\'div-option-'+totalCounter+'\')"><span style="font-weight:bold;text-align:center">X</span></button> <a class="button mt-10" id="button-'+totalOptionsCompound+'" style="width:27%; display: flex; flex-direction: row" onclick="addSimpleFromCompound(this)"><span style="width: 75%"><spring:message code="label.addOptionSimple"/></span><i class="fa fa-send-o" style="width: 25%; position: unset"></i></a></div>');
       	  $("#total-simple-compound-" + totalOptionsCompound).val(0);
     	  totalOptionsCompound += 1;
     	  $("#total-compound").val(totalOptionsCompound);
-
-      });   	  
+    	  totalCounter += 1;
+      });  
+      
+      function deleteNodeSimple(id) {
+    	  $("#" + id).remove();
+    	  totalOptionsSimple -= 1;
+    	  $("#total-simple").val(totalOptionsSimple);
+      }
+      
+      function deleteNodeCompound(id) {
+    	  $("#" + id).remove();
+    	  totalOptionsCompound -= 1;
+    	  $("#total-compound").val(totalOptionsCompound);
+      }
+      
+      function deleteNodeSimpleFromCompound(id, valueCompound) {
+    	  $("#" + id).remove();
+    	  $("#total-simple-compound-" + valueCompound).val(parseInt($("#total-simple-compound-" + valueCompound).val()) - 1);
+      }
 
    </script>
    <script src="<c:url value="/resources/services/js/tooltip-script.js"/>" ></script>

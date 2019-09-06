@@ -2,6 +2,7 @@ package es.unileon.ulebankoffice.domain;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -62,7 +63,30 @@ public class Test {
         while(iterator.hasNext()) {
             questionList.add(iterator.next());
         }
-
+        
+        Collections.sort(questionList);
+        
         return questionList;
     }
+    
+    public int getMaxPosition() {
+    	return questions.getMaxPosition();
+    }
+    
+    public void updatePositions(Handler oldQuestionHandler, int newPosition) {
+    	int oldPosition = this.questions.search(oldQuestionHandler).getPosition();
+    	for(Question question: this.questions.getQuestions()) {
+    		if(question.getPosition() >= newPosition && question.getPosition() < oldPosition && newPosition < oldPosition) {
+    			question.setPosition(question.getPosition() + 1);
+    		}
+    		else if (question.getPosition() > oldPosition && question.getPosition() <= newPosition && newPosition > oldPosition) {
+    			question.setPosition(question.getPosition() - 1);
+			}
+    		else if (question.getHandler().compareTo(oldQuestionHandler)) {
+    			question.setPosition(newPosition);
+    		}
+    	}
+    }
+    
+    
 }

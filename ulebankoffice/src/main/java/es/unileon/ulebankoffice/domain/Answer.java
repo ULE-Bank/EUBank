@@ -6,6 +6,7 @@ public class Answer {
     private Handler handler;
 
     public Answer(Handler question, Handler option) throws Exception {
+    	QuestionStore.getInstance();
         if (QuestionStore.getInstance().search(question) == null) {
             throw new Exception("Question handler doesn't match with any question from the store.");
         }

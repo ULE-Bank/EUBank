@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 
-public class Question {
+public class Question implements Comparable<Question>{
 	
 	@Id
 	private String id;
     private Handler handler;
     private String text;
     private Options options;
+    private int position;
 
     public Question(String text) {
         this.text = text;
@@ -21,10 +22,19 @@ public class Question {
     }
     
     @PersistenceConstructor
-    public Question(Handler handler, String text, Options options) {
+    public Question(Handler handler, String text, Options options, int position) {
         this.text = text;
         this.handler = handler;
         this.options = options;
+        this.position = position;
+    }
+    
+    public void setPosition(int position) {
+    	this.position = position;
+    }
+    
+    public int getPosition() {
+    	return this.position;
     }
     
     public void setText(String text){
@@ -71,5 +81,13 @@ public class Question {
 
     public List<Option> getOptions() {
         return this.options.getOptions();
+    }
+    
+    @Override
+    public int compareTo(Question question) {
+      if (question == null) {
+        return 0;
+      }
+      return this.getPosition() - question.getPosition();
     }
 }

@@ -132,13 +132,13 @@
          <div class="container">
             <div class="row col-md-6 col-md-offset-3">
                <div class="login-2-form clearfix">
-                  <form name="f" action="/offersconsulting/j_spring_security_check" method="POST">
+                  <form name="f" action="/processing_login" method="POST">
                      <c:if test="${not empty param.login_error}">
                      </c:if>
                      <div class="section-field">
                         Email:
                         <div class="field-widget" style="text-align:justify;">
-                           <i class="fa fa-user"></i> <input type='email' name='j_username' />
+                           <i class="fa fa-user"></i> <input type='email' name='username' />
                            <spring:message  code="label.emailIsImportant"/>
                         </div>
                      </div>

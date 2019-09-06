@@ -43,6 +43,7 @@ public class OffersConsultingController {
 	@RequestMapping(value = "/offersconsulting", method = RequestMethod.GET)
 	public String add(ModelMap model, HttpServletRequest req, HttpServletResponse resp, Principal principal) throws IOException {		
 		List<FinancialAdvisorRequest> lists;
+		QuestionStore.populateSingleton(qSRepository);
 		if(hasRole("ROLE_ADMIN") || hasRole("ROLE_SUPERVISOR") || hasRole("ROLE_EMPLEADO")){
 			lists = repo.findAllByOrderByStatusDesc();
 			logger.info("Showing all inquiries, pending first");
@@ -51,8 +52,7 @@ public class OffersConsultingController {
 			logger.info("Showing only inquiries from user " + req.getUserPrincipal().getName() + ", pending first");
 		}
 		
-			model.addAttribute("lists", lists);
-						
+			model.addAttribute("lists", lists);	
 			model.addAttribute("name", req.getUserPrincipal().getName());
 		
 

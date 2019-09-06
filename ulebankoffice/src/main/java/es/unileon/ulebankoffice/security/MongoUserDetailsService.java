@@ -37,7 +37,6 @@ public class MongoUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String userName) {
 		
 		UleBankEmployee empleado = getUser(userName);
-		
 		if(empleado == null){
 			logger.info("Someone has tried to log in with username: " + userName + ". It doesn't exist in the office.");
 			throw new UsernameNotFoundException("Wrong credentials");

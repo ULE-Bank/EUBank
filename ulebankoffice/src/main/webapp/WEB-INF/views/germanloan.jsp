@@ -94,14 +94,14 @@
 						label : '<spring:message code="label.amortization"/>',
 						backgroundColor : colorCorporativo,
 						borderColor : colorCorporativo,
-						data : [ 7500, 6500, 7333, 8166, 9000, 9833, 10666,
+						data : [ 0, 6500, 7333, 8166, 9000, 9833, 10666,
 								11500, 12333, 13166, 14000 ]
 					},
 					{
 						label : '<spring:message code="label.interest"/>',
 						backgroundColor : colorHeader,
 						borderColor : colorHeader,
-						data : [ 0, 7500, 6667, 5834, 5000, 4167, 3334, 2500,
+						data : [ 7500, 7500, 6667, 5834, 5000, 4167, 3334, 2500,
 								1667, 834, 0 ]
 					} ]
 		};

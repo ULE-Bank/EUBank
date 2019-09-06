@@ -23,6 +23,7 @@ import es.unileon.ulebankoffice.domain.Answer;
 import es.unileon.ulebankoffice.domain.Answers;
 import es.unileon.ulebankoffice.domain.Client;
 import es.unileon.ulebankoffice.domain.Compound;
+import es.unileon.ulebankoffice.domain.Handler;
 import es.unileon.ulebankoffice.domain.Option;
 import es.unileon.ulebankoffice.domain.OptionHandler;
 import es.unileon.ulebankoffice.domain.Question;
@@ -61,7 +62,9 @@ public class EditSurveyController {
 		if (hasRole("ROLE_ADMIN") || hasRole("ROLE_SUPERVISOR") || hasRole("ROLE_EMPLEADO")) {
 			Test.populateSingleton(testRepository);
 			Test test = Test.getInstance();
-			test.remove(new QuestionHandler(Long.parseLong(req.getParameter("question-delete"))));
+			Handler questionHandler = new QuestionHandler(Long.parseLong(req.getParameter("question-delete")));
+			test.updatePositions(questionHandler, test.getMaxPosition() + 1);
+			test.remove(questionHandler);
 			testRepository.save(test);
 	        return "redirect:/offersconsulting/editsurvey";
 		}else {

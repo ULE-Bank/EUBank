@@ -17,11 +17,12 @@ public class QuestionsTest {
     @Test
     public void addTest() {
         Question question = new Question("Question test");
+        question.setText("Question test");
         assertNull(this.questions.search(question.getHandler()));
         this.questions.add(question);
         assertEquals(question, this.questions.search(question.getHandler()));
     }
-
+    
     @Test
     public void addTestAlreadyExists() {
         Question question = new Question("Question test");
@@ -42,7 +43,7 @@ public class QuestionsTest {
 
 
     @Test
-    public void searchTestDoesntExists() {
+    public void searchDoesntExistsTest() {
         Question question = new Question("Question test");
         assertNull(this.questions.search(question.getHandler()));
     }
@@ -58,10 +59,28 @@ public class QuestionsTest {
 
 
     @Test
-    public void removeTestDoesntExists() {
+    public void removeDoesntExistsTest() {
         Question question = new Question("Question test");
         this.questions.remove(question.getHandler());
         assertNull(this.questions.search(question.getHandler()));
+    }
+    
+    @Test
+    public void getMaxPositionTest() {
+    	Question question1 = new Question("Question test");
+    	question1.setPosition(1);
+        this.questions.add(question1);
+        Question question2 = new Question("Question test");
+        question2.setHandler(new QuestionHandler(20));
+        question2.setPosition(2);
+        this.questions.add(question2);
+        
+        assertEquals(2, this.questions.getMaxPosition());
+    }
+    
+    @Test
+    public void getMaxPositionEmptyTest() {
+        assertEquals(0, this.questions.getMaxPosition());
     }
 
 }

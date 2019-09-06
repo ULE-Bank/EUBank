@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.unileon.ulebankoffice.domain.Compound;
+import es.unileon.ulebankoffice.domain.Handler;
 import es.unileon.ulebankoffice.domain.OptionHandler;
 import es.unileon.ulebankoffice.domain.Options;
 import es.unileon.ulebankoffice.domain.Question;
@@ -43,6 +44,8 @@ public class CreateQuestion {
     @GetMapping
     public String getCreateQuestion(ModelMap model, HttpServletRequest req, HttpServletResponse resp) {
 		if (hasRole("ROLE_ADMIN") || hasRole("ROLE_SUPERVISOR") || hasRole("ROLE_EMPLEADO")) {
+	    	Test.populateSingleton(testRepository);
+			model.addAttribute("maxPosition", Test.getInstance().getMaxPosition());
 	        return VIEW;
 		}else {
 			logger.error(req.getRemoteAddr() + " " + req.getLocalAddr() + " has tried to POST to a enquiry's id without the needed role and"
@@ -60,37 +63,68 @@ public class CreateQuestion {
 	    	Question question = new Question(req.getParameter("question-text"));
 	    	long timestamp = new Date().getTime();
 	    	int marks = 1;
+	    	int simpleFound = 0;
+	    	int compoundFound = 0;
+	    	int simpleFromCompoundFound = 0;
+	    	int totalSimpleFromCompound = 0;
+	    	int i = 0;
+	    	int j = 0;
 	    	
-	    	for(int i = 0; i < totalSimple; i++) {
-	    		Simple simple = new Simple(req.getParameter("option-simple-" + i), Float.parseFloat(req.getParameter("option-simple-" + i + "-value")), new OptionHandler(timestamp + marks));
-	    		question.add(simple);
-	    		marks += 1;
-	    	}
-	    	
-	    	for(int i = 0; i < totalCompound; i++) {
-	    		Compound compound = new Compound(req.getParameter("option-compound-" + i), new Options(), new OptionHandler(timestamp + marks));
-	    		marks += 1;
-	    		
-	    		for(int j = 0; j < Integer.parseInt(req.getParameter("total-simple-compound-" + i)); j++) {
-	        		Simple simple = new Simple(req.getParameter("option-compound-" + i + "-simple-" + j), 
-	        									Float.parseFloat(req.getParameter("option-compound-" + i + "-simple-" + j + "-value")),
-	        									new OptionHandler(timestamp + marks));
-	        		compound.add(simple);
-	        		marks += 1;
-
+	    	while(simpleFound != totalSimple) {
+	    		if (req.getParameter("option-simple-" + i) != null) {
+		    		Simple simple = new Simple(req.getParameter("option-simple-" + i), Float.parseFloat(req.getParameter("option-simple-" + i + "-value")), new OptionHandler(timestamp + marks));
+		    		question.add(simple);
+		    		marks += 1;
+		    		simpleFound++;
 	    		}
-	    		question.add(compound);
-	    		marks += 1;
-
+	    		i++;
 	    	}
+	    	
+	    	i = 0;
+	    	
+	    	while(compoundFound != totalCompound) {
+	    		if (req.getParameter("option-compound-" + i) != null) {
+	    			Compound compound = new Compound(req.getParameter("option-compound-" + i), new Options(), new OptionHandler(timestamp + marks));
+		    		marks += 1;
+		    		compoundFound++;
+		    		simpleFromCompoundFound = 0;
+		    		totalSimpleFromCompound = Integer.parseInt(req.getParameter("total-simple-compound-" + i));
+		    		j = 0;
+		    		
+		    		while(simpleFromCompoundFound != totalSimpleFromCompound) {
+		    			if (req.getParameter("option-compound-" + i + "-simple-" + j) != null) {
+		    				Simple simple = new Simple(req.getParameter("option-compound-" + i + "-simple-" + j), 
+									Float.parseFloat(req.getParameter("option-compound-" + i + "-simple-" + j + "-value")),
+									new OptionHandler(timestamp + marks));
+							compound.add(simple);
+							marks += 1;
+							simpleFromCompoundFound++;
+		    			}
+						
+						j++;
+		    		}
+		    		question.add(compound);
+	    		}
+	    		i++;
+	    	}
+	    	
 	    	QuestionStore.populateSingleton(questionStoreRepository);
 	    	QuestionStore questionStore = QuestionStore.getInstance();
+	    	Test.populateSingleton(testRepository);
+	    	Test test = Test.getInstance();
+	    	
+	    	int position = Integer.parseInt(req.getParameter("question-position"));
+	    	int maxPosition = test.getMaxPosition() + 1;
+	    	question.setPosition(maxPosition);
+	    	test.add(question);
+	    	
+	    	if (position != maxPosition) {
+    			test.updatePositions(question.getHandler(), position);
+	    	}
+
 	    	questionStore.add(question);
 	    	questionStoreRepository.save(questionStore);
 	    	
-	    	Test.populateSingleton(testRepository);
-	    	Test test = Test.getInstance();
-	    	test.add(question);
 	    	testRepository.save(test);
 	    	
 			return "redirect:/offersconsulting/editsurvey";

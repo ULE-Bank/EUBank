@@ -153,7 +153,7 @@
 						</c:when>
 						<c:otherwise>
 							<form name="f"
-								action="<c:url value="j_spring_security_check"></c:url>"
+								action="<c:url value="/processing_login"></c:url>"
 								method="POST">
 								<c:if test="${not empty param.login_error}">
 									<div style="color: red">
@@ -164,14 +164,14 @@
 									Username:
 									<div class="field-widget">
 										<i class="fa fa-user"></i> <input type='text'
-											name='j_username' />
+											name='username' />
 									</div>
 								</div>
 								<div class="section-field">
 									Password:
 									<div class="field-widget">
 										<i class="fa fa-unlock-alt"></i> <input type='password'
-											name='j_password'>
+											name='password'>
 									</div>
 								</div>
 								<div class="section-field">
