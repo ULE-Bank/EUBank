@@ -3,6 +3,8 @@
  */
 package es.unileon.ulebankoffice.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -16,6 +18,7 @@ import java.util.Locale;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.owasp.esapi.Logger;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -491,6 +494,12 @@ public class CurrentAccount extends Operation implements FinancialProduct {
 	}
 	
 	public void removeMovement(int index) {
+		double valueToUpdate = this.movements.get(index).getValue();
+		valueToUpdate *= this.movements.get(index).getOperation().equals("I") ? -1 : 1;
+				
+		this.setTotalBalance(BigDecimal.valueOf(Math.rint((this.getTotalBalance() + valueToUpdate) * 100) / 100)
+				.setScale(2, RoundingMode.HALF_UP).doubleValue());
+		
 		this.movements.remove(index);
 	}
 	

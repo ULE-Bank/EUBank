@@ -208,7 +208,7 @@ public class OfficeClientPageController {
 
 		logger.info(principal.getName() + " " + req.getRemoteAddr() + " has added new movements to the account: "
 				+ accountNumber);
-		currentAccount.setTotalBalance(BigDecimal.valueOf(Math.rint(currentAccount.getTotalBalance() + balanceAux * 100) / 100)
+		currentAccount.setTotalBalance(BigDecimal.valueOf(Math.rint((currentAccount.getTotalBalance() + balanceAux) * 100) / 100)
 				.setScale(2, RoundingMode.HALF_UP).doubleValue());
 		currentAccountsRepo.save(currentAccount);
 
