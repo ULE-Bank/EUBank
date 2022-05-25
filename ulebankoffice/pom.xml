@@ -16,7 +16,7 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<archiveClasses>true</archiveClasses>
-		<org.springframework.version>4.3.18.RELEASE</org.springframework.version>
+		<org.springframework.version>5.2.22.RELEASE</org.springframework.version>
 		<!-- I declare argLine as a property so JaCoCo can set its agent properly. -->
 		<argLine>-Xms256m -Xmx512m -ea -Dfile.encoding=UTF-8 -Dtest=*</argLine>
 		<spring.security.core.version>4.1.5.RELEASE</spring.security.core.version>
